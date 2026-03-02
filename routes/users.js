@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
-import { login, register, current } from '../controllers/users';
+const { login, register, current } = require('../controllers/users');
+const { auth } = require('../middleware/auth')
 
 // api/user/login
-router.post('/login', login());
+router.post('/login', login);
 
 // api/user/register
-router.post('/register', register());
+router.post('/register', register);
 
 // api/user/current
-router.get('/current', current());
+router.get('/current', auth, current);
 
 module.exports = router;
