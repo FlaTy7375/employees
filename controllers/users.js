@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken")
 
 const login = async function(req, res) {
   try {
-
     const { email, password } = req.body
   
     if (!email && !password) {
@@ -31,7 +30,8 @@ const login = async function(req, res) {
       return res.status(400).json({ message: "Неверно введен логин или пароль." })
     }
   } catch(err) {
-    res.status(500).json({ message: "Что-то пошло не так."} )
+    console.error('Login error:', err);
+    res.status(500).json({ message: "Что-то пошло не так.", error: err.message })
   }
 }
 
@@ -78,7 +78,7 @@ const register = async function(req, res) {
 }
 
 const current = async function(req, res) {
-  res.send('current');
+  return res.status(200).json(req.user)
 }
 
 module.exports = {login, register, current}

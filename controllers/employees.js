@@ -11,9 +11,18 @@ const all = async function(req, res) {
 
 const getEmployee = async function(req, res) {
     try {
+        const { id } = req.params
 
+        const employee = await prisma.employee.findUnique({
+            where: {
+                id
+            }
+        })
+
+        res.status(200).json(employee)
     } catch(err) {
-        res.status(500).json({ message: "Что-то пошло не так."} )
+        console.error('Get employee error:', err);
+        res.status(500).json({ message: "Не удалось получить сотрудника", error: err.message })
     }
 }
 
@@ -41,16 +50,34 @@ const addEmployee = async function(req, res) {
 
 const removeEmployee = async function(req, res) {
     try {
+        const { id } = req.params;
 
+        await prisma.employee.delete({
+            where: {
+                id
+            }
+        });
+
+        res.status(200).json({ message: "Сотрудник удален!" })
     } catch(err) {
-        res.status(400).json({ message: "Что-то пошло не так."} )
+        res.status(400).json({ message: "Не удалось удалить сотрудника.", error: err.message } )
     }
 
 }
 
 const editEmployee = async function(req, res) {
     try {
+        const data = req.body
+        const { id } = req.params
 
+        await prisma.employee.update({
+            where: {
+                id
+            },
+            data
+        });
+
+        res.status(200).json({ message: "Сотрудник отредактирован!" })
     } catch(err) {
         res.status(400).json({ message: "Что-то пошло не так."} )
     }
