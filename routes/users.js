@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-import { login, register, current } from '../controllers/users';
+const express = require('express');
+const router = express.Router();
+const { login, register, current } = require('../controllers/users');
+const { auth } = require('../middleware/auth')
 
 // api/user/login
 router.post('/login', login());
