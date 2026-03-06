@@ -5,6 +5,7 @@ import './index.css'
 import { Paths } from './paths'
 import { Login } from './pages/login'
 import { Register } from './pages/register'
+import { ConfigProvider, theme } from 'antd'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ConfigProvider theme={{
+      algorithm: theme.darkAlgorithm
+    }}>
+      <RouterProvider router={router} />
+    </ConfigProvider>
   </StrictMode>,
 )
