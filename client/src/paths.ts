@@ -3,7 +3,7 @@ export const Paths = {
     employeeAdd: "/employee/add",
     employeeEdit: "/employee/edit",
     employeeRemove: "/employee/remove",
-    employee: "/employee/",
+    employee: "/employee",
     status: "/status",
     login: '/login',
     register: '/register'
