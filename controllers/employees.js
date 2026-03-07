@@ -29,8 +29,10 @@ const getEmployee = async function(req, res) {
 const addEmployee = async function(req, res) {
     try {
         const data = req.body;
+        console.log('Add employee data:', data);
+        console.log('User from req:', req.user);
 
-        if (!data.firstName || !data.lastName || !data.adress || !data.age) {
+        if (!data.firstName || !data.lastName || !data.address || !data.age) {
             return res.status(400).json({ message: "Все поля обязательны!" })
         }
 
@@ -43,7 +45,8 @@ const addEmployee = async function(req, res) {
 
         return res.status(201).json(employee)
     } catch(err) {
-        res.status(500).json({ message: "Что-то пошло не так."} )
+        console.error('Add employee error:', err);
+        res.status(500).json({ message: "Что-то пошло не так.", error: err.message })
     }
 
 }
